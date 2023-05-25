@@ -37,4 +37,22 @@ const generateImage = async (req, res) => {
  }
 };
 
-module.exports = { generateImage };
+const createCompletion = async (req, res) => {
+   try {
+      const completeion = await openai.createChatCompletion({
+         model: "text-davinci-003",
+         prompt: "Hello world",
+      });
+
+      console.log(completeion.data.choices[0].text);
+   } catch (error) {
+       if (error.response) {
+    console.log(error.response.status);
+    console.log(error.response.data);
+  } else {
+    console.log(error.message);
+  }
+   }
+}
+
+module.exports = { generateImage, createCompletion };
